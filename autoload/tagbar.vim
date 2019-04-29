@@ -2959,18 +2959,19 @@ function! s:SetStatusLine()
     let flags += (sorted && g:tagbar_case_insensitive) ? ['i'] : []
     let flags += g:tagbar_hide_nonpublic ? ['v'] : []
 
-    if exists('g:tagbar_status_func')
-        let args = [in_tagbar, sortstr, fname, flags]
-        let &l:statusline = call(g:tagbar_status_func, args)
-    else
-        let colour = in_tagbar ? '%#StatusLine#' : '%#StatusLineNC#'
-        let flagstr = join(flags, '')
-        if flagstr != ''
-            let flagstr = '[' . flagstr . '] '
-        endif
-        let text = colour . '[' . sortstr . '] ' . flagstr . fname
-        let &l:statusline = text
-    endif
+" disable tagbar statusline setting
+"    if exists('g:tagbar_status_func')
+"        let args = [in_tagbar, sortstr, fname, flags]
+"        let &l:statusline = call(g:tagbar_status_func, args)
+"    else
+"        let colour = in_tagbar ? '%#StatusLine#' : '%#StatusLineNC#'
+"        let flagstr = join(flags, '')
+"        if flagstr != ''
+"            let flagstr = '[' . flagstr . '] '
+"        endif
+"        let text = colour . '[' . sortstr . '] ' . flagstr . fname
+"        let &l:statusline = text
+"    endif
 
     if !in_tagbar
         call s:goto_win(pprevwinnr, 1)
